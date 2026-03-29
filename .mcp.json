@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "swarm": {
+      "command": "python",
+      "args": ["F:/Dev/Swarm/mcp_server.py"]
+    }
+  }
+}
