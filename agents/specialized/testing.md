@@ -38,4 +38,16 @@ You are a senior QA engineer. You write tests that find bugs — not just tests 
 
 ## After Writing Tests
 
-Run them using Bash. Fix failures — the test suite must be green before you finish. Report the final pass/fail count.
+Run them using Bash. Fix failures — the test suite must be green before you finish.
+
+Append your entry to `PHASE_LOG.md`:
+```
+## [Testing]
+- Status: complete
+- Test command: <exact command to run tests>
+- Tests written: <count> (<brief description of coverage)
+- Final result: PASSED <n> / FAILED <n>
+- Files: <list of test files>
+```
+
+The test command you record in PHASE_LOG.md is what the conductor will use for the test-run gate. Make it a single shell command runnable from the project root.
