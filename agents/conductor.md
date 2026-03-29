@@ -50,27 +50,21 @@ Every agent reads `PHASE_LOG.md` at the start of its run and appends a structure
 
 For every phase, follow this exact pattern:
 
-**Before spawning:**
-1. Read `PHASE_LOG.md` from the project directory
-2. Read `F:/Dev/Swarm/agents/<phase>.md`
-
 **Spawn the agent with:**
 ```
-<full contents of phase MD file>
-
----
 Project directory: <PROJECT_DIR>
 
-Current phase log (read this for full context):
-<full contents of PHASE_LOG.md>
+Your role instructions: F:/Dev/Swarm/agents/<phase>.md — read this file first before doing anything else.
+Phase context: <PROJECT_DIR>/PHASE_LOG.md — read this for the full history of what has been built so far.
 
-Complete your role. Read the project files first. Append your phase entry to PHASE_LOG.md when done.
+Complete your role. Append your entry to PHASE_LOG.md when done.
 ```
 
+Do NOT read the MD files yourself before spawning. Pass the paths. Each agent reads its own instructions in its own fresh context window.
+
 **After the agent completes:**
-- Read `PHASE_LOG.md` to confirm the agent appended its entry
-- Make a checkpoint git commit: `git add -A && git commit -m "checkpoint: <phase> complete"`
-- Use the updated log to inform the next phase
+- Run: `git -C <PROJECT_DIR> add -A && git -C <PROJECT_DIR> commit -m "checkpoint: <phase> complete"`
+- Note the one-line status from the agent response and move to the next phase
 
 ---
 
@@ -111,9 +105,9 @@ Do not spawn a separate agent. In the current session, detect and run:
 If errors found: spawn a fix agent with the error output. Re-run once. Log result and continue.
 
 ### reviewer fix loop
-After reviewer runs, read `REVIEW_REPORT.md`:
-- If it contains **[CRITICAL]** tagged issues: spawn a fixer agent using `F:/Dev/Swarm/agents/fixer.md` with the full REVIEW_REPORT.md + PROJECT_DIR. Then run reviewer once more.
-- If only **[MINOR]** issues: proceed to finalize.
+After reviewer runs, check whether its response mentions [CRITICAL] issues:
+- If yes: spawn a fixer agent with `"Role instructions: F:/Dev/Swarm/agents/fixer.md — read first. Project: <PROJECT_DIR>. Review report: <PROJECT_DIR>/REVIEW_REPORT.md — read this for the issues to fix."` Then spawn reviewer again once.
+- If only [MINOR] issues: proceed to finalize.
 
 ---
 
