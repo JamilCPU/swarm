@@ -1,4 +1,29 @@
+# Python
 __pycache__/
 *.pyc
-.env
+venv/
+.venv/
+*.egg-info/
+dist/
+build/
+
+# Swarm state
 .swarm_project
+
+# secrets and local data
+.env
+.env.*
+!.env.example
+*.keys
+*.db
+*.sqlite
+*.sqlite3
+
+# editor / OS
+.vs/
+.idea/
+node_modules/
+bin/
+obj/
+*.class
+target/
