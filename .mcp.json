@@ -2,7 +2,7 @@
   "mcpServers": {
     "swarm": {
       "command": "python",
-      "args": ["F:/Dev/Swarm/mcp_server.py"]
+      "args": ["<path-to-swarm>/mcp_server.py"]
     }
   }
 }
